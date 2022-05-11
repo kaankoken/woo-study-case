@@ -50,3 +50,8 @@ app.*.map.json
 
 # Visual Code
 .vscode/
+
+# Generated files
+**/*.g.dart
+**/*.freezed.dart
+**/*.lock
