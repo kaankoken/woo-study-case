@@ -5,8 +5,8 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
-  flutter: 3.0.0
+  sdk: ">=2.16.0 <3.0.0"
+  flutter: 2.10.3
 
 dependencies:
   flutter:
@@ -16,9 +16,15 @@ dependencies:
   cupertino_icons: ^1.0.4
   google_fonts: ^2.3.2
   auto_size_text: ^3.0.0
+  
+  # Localization
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+
 
   # State Management & DI
-  riverpod: ^2.0.0-dev.6 
+  flutter_riverpod: 2.0.0-dev.6
 
   # Data Class
   freezed_annotation: ^2.0.3
@@ -26,16 +32,14 @@ dependencies:
   # Utils
   json_annotation: ^4.5.0
   dart_code_metrics: ^4.15.0
-  collection: ^1.15.0
-
+  collection: 1.15.0
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
-  flutter_lints: ^1.0.4
+  flutter_lints: 1.0.4
 
   # Data Class
   freezed: ^2.0.3
@@ -45,8 +49,10 @@ dev_dependencies:
   analyzer: ^4.0.0
   json_serializable: ^6.2.0
 
+
 dependency_overrides:
   analyzer:
+
 
 flutter:
   uses-material-design: true
