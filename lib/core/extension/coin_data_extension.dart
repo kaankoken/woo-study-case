@@ -6,7 +6,7 @@ import 'package:woo_study_case/domain/home/table_view_model.dart';
 import 'package:woo_study_case/domain/models/coin.dart';
 import 'package:woo_study_case/infra/dto/coin_dto.dart';
 
-final _formatter = NumberFormat('#,##.000');
+final _formatter = NumberFormat("#,##0.00", "en_US");
 final _volumeFormatter = NumberFormat.compact();
 
 extension CoinDataExtension on String {
