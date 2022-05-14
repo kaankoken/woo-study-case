@@ -14,6 +14,7 @@ class Coin with _$Coin {
     required String symbol,
     required String lastPriceDisplay,
     required String volumeDisplay,
+    required int priority,
   }) = _Coin;
 
   factory Coin.fromJson(Map<String, dynamic> json) => _$CoinFromJson(json);

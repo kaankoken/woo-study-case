@@ -38,6 +38,34 @@ extension VolumeExtension on double {
   String get volumeDisplay => _volumeFormatter.format(this).toString();
 }
 
+extension PriorityExtension on String {
+  int get basePriority {
+    switch (this) {
+      case 'BTC':
+        return 1;
+      case 'ETH':
+        return 2;
+      case 'WOO':
+        return 3;
+      default:
+        return 4;
+    }
+  }
+
+  int get quotePriority {
+    switch (this) {
+      case 'USDT':
+        return 1;
+      case 'USDC':
+        return 2;
+      case 'PERP':
+        return 3;
+      default:
+        return 4;
+    }
+  }
+}
+
 extension CoinDataConversionExtension on List<CoinDto> {
   List<Coin> toCoinList() {
     return map(
@@ -50,6 +78,7 @@ extension CoinDataConversionExtension on List<CoinDto> {
         symbol: e.type == 'SPOT' ? '${e.base}/${e.quote}' : '${e.base}-PERP',
         lastPriceDisplay: e.lastPrice.priceDisplay,
         volumeDisplay: '\$' + e.volume.volumeDisplay,
+        priority: e.base.basePriority,
       ),
     ).toList();
   }

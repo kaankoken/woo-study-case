@@ -3,7 +3,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woo_study_case/core/constants/app_assets.dart';
 import 'package:woo_study_case/core/extension/coin_data_extension.dart';
-import 'package:woo_study_case/core/extension/tab_index_extension.dart';
 import 'package:woo_study_case/domain/models/coin.dart';
 
 StateProvider<bool> isAscending = StateProvider((_) => true);
@@ -63,13 +62,43 @@ class TableViewModel {
   void init() async {
     final _list = await AppAssets.DATA_PATH.readJsonData(_filter);
     list = _list.toCoinList();
+    _filter.name == TabFilter.ALL.name
+        ? list.sort(
+            (coin1, coin2) => compareString(
+              true,
+              '${coin1.priority}${coin1.symbol}',
+              '${coin2.priority}${coin2.symbol}',
+            ),
+          )
+        : list.sort(
+            (coin1, coin2) => compareString(
+              false,
+              '${coin2.priority}${coin2.volume}',
+              '${coin1.priority}${coin1.volume}',
+            ),
+          );
 
     _ref.read(filteredList(_filter).notifier).update((_) => list);
     _ref.read(isListLoaded(_filter).notifier).update((_) => true);
   }
 
   void defaultSort() {
-    //list.sort((coin1, coin2) => compareString(true, coin1.firstName, coin2.firstName));
+    _filter.name == TabFilter.ALL.name
+        ? list.sort(
+            (coin1, coin2) => compareString(
+              true,
+              '${coin1.priority}${coin1.symbol}',
+              '${coin2.priority}${coin2.symbol}',
+            ),
+          )
+        : list.sort(
+            (coin1, coin2) => compareString(
+              false,
+              '${coin2.priority}${coin2.volume}',
+              '${coin1.priority}${coin1.volume}',
+            ),
+          );
+
     _ref.read(sortColumnIndex.notifier).update((_) => null);
     _ref.read(isAscending.notifier).update((_) => _filter.name == TabFilter.ALL.name);
   }
@@ -85,6 +114,9 @@ class TableViewModel {
       ascending ? value1.compareTo(value2) : value2.compareTo(value1);
 
   int compareDouble(bool ascending, double value1, double value2) =>
+      ascending ? value1.compareTo(value2) : value2.compareTo(value1);
+
+  int comparePriority(bool ascending, int value1, int value2) =>
       ascending ? value1.compareTo(value2) : value2.compareTo(value1);
 
   void searchOnList(String text) {

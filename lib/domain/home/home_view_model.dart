@@ -59,6 +59,7 @@ class HomeViewModel {
       _ref.read(searchIcon.state).update((_) => Icons.search);
       _ref.read(searchTitle.state).update((_) => Text(appStrings.search));
       _ref.read(tableViewModel(tabController.index.name)).searchOnList('');
+
       searchController.clear();
       searchFocusNode.unfocus();
     }
